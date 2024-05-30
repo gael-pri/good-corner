@@ -3,7 +3,7 @@ import adsRoutes from "./ads.routes";
 
 const router = express.Router();
 
-router.use('/', adsRoutes);
+router.use('/ads', adsRoutes);
 
 router.get('/', (req, res) => {
     console.log('Mon index');

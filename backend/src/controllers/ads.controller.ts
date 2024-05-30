@@ -1,12 +1,15 @@
-import fs from "node:fs";
 import { Request, Response } from "express";
-
 import db from "../db/sqliteConfig";
 
 // Afficher toutes les annonces
 const getAds = (req: Request, res: Response): void => {
       db.all("SELECT * FROM good_corner", (err, rows) => {
-              res.send(rows);
+            if (err) {
+                  console.error("Database error:", err);
+                  res.status(500).send("Internal Server Error");
+                  return;
+              }
+              res.status(200).send(rows);
       })
 }
 
@@ -15,7 +18,12 @@ const getAdsVille = (req: Request, res: Response): void => {
       const ville: string = req.params.name;
       const stmt = db.prepare("SELECT * FROM good_corner where location = ?");
       stmt.all(ville, (err, rows) => {
-            res.send(rows);
+            if (err) {
+                  console.error("Database error:", err);
+                  res.status(500).send("Internal Server Error");
+                  return;
+              }
+              res.status(200).send(rows);
       })
       stmt.finalize();
 }
@@ -30,7 +38,6 @@ const delAds40 = (req: Request, res: Response): void => {
                   res.status(500).send("Internal Server Error");
                   return;
               }
-      
               res.status(200).send(`Deleted ${this.changes} ads with price greater than ${price}€`);
           });
       stmt.finalize();
@@ -46,7 +53,6 @@ const updateAdsO = (req: Request, res: Response): void => {
                   res.status(500).send("Internal Server Error");
                   return;
               }
-      
               res.status(200).send(`updated ${this.changes} ads from date ${dateAds} to 0€`);
           });
       stmt.finalize();
@@ -56,11 +62,7 @@ const updateAdsO = (req: Request, res: Response): void => {
 // BONUS : Afficher la moyenne des prix des annonces par ville
 // BONUS 2 : Modifier le endpoint de suppression des annonces avec un prix supérieur pour qu’il prenne en paramètre de body de delete  le prix plancher
 
-// Insérer ces catégories :
-            // vêtement
-            // voiture
-            // autre
-// Ajouter une catégorie à chaque annonce
+
 // Afficher les annonces de la catégorie “vêtement”
 // Afficher les annonces des catégories “vêtement” et “voiture”
 // Afficher le prix moyen des annonces de la catégorie “autre”

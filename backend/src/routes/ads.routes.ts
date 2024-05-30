@@ -3,11 +3,11 @@ import { delAds40, getAds, getAdsVille, updateAdsO }  from "../controllers/ads.c
 
 const router = express.Router();
 
-router.get("/ads", getAds);
-router.get("/ads/ville/:name", getAdsVille);
+router.get("/", getAds);
+router.get("/ville/:name", getAdsVille);
 
-router.delete("/ads/price/:myprice", delAds40);
+router.delete("/price/:myprice", delAds40);
 
-router.put("/ads/mydate", updateAdsO);
+router.put("/mydate", updateAdsO);
 
 export default router;
