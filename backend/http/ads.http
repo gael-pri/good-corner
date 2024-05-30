@@ -2,12 +2,6 @@
 GET http://localhost:3000/ads/
 
 ###
-GET http://localhost:3000/movies/count
-
-###
-GET http://localhost:3000/movies/totalBudget
-
-###
 GET http://localhost:3000/ads/ville/Bordeaux
 
 ###
@@ -19,3 +13,15 @@ Content-Type: application/json
 {
     
 }
+
+###
+GET http://localhost:3000/categorie/vêtement
+
+###
+GET http://localhost:3000/categorie/v&v
+
+###
+GET http://localhost:3000/categorie/average/autre
+
+###
+GET http://localhost:3000/categorie/startingWith/v

@@ -64,10 +64,24 @@ const updateAdsO = (req: Request, res: Response): void => {
 
 
 // Afficher les annonces de la catégorie “vêtement”
+const getCategorie = (req: Request, res: Response): void => {
+      const selectedCategory: string = req.params.name;
+      const stmt = db.prepare("Select * FROM good_corner where categorie = ?");
+      stmt.all(selectedCategory, (err, rows) => {
+            if (err) {
+                  console.error("Database error:", err);
+                  res.status(500).send("Internal Server Error");
+                  return;
+              }
+              res.status(200).send(rows);
+          });
+      stmt.finalize();
+}
+
 // Afficher les annonces des catégories “vêtement” et “voiture”
 // Afficher le prix moyen des annonces de la catégorie “autre”
 // Afficher les annonces des catégories dont le nom commence par un “v”
 // Créer un endpoint qui permet d’ajouter une annonce et de créer sa catégorie à la volée, tout cela dans une transaction
 
 
-export { getAds, getAdsVille, delAds40,updateAdsO };
+export { getAds, getAdsVille, delAds40,updateAdsO, getCategorie };
