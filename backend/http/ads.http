@@ -1,0 +1,17 @@
+
+GET http://localhost:3000/ads/
+
+###
+GET http://localhost:3000/movies/count
+
+###
+GET http://localhost:3000/movies/totalBudget
+
+###
+GET http://localhost:3000/ads/ville/Bordeaux
+
+###
+DELETE http://localhost:3000/ads/price/40
+
+###
+PUT http://localhost:3000/ads/Septembre/1er
